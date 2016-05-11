@@ -7,6 +7,7 @@
 //
 
 #include "Character.hpp"
+using namespace cocos2d;
 
 bool Character::init()
 {
@@ -17,6 +18,24 @@ bool Character::init()
 
     this->timeline = cocos2d::CSLoader::createTimeline("Character.csb");
     this->timeline->retain();
-    
+    this->velocity = 0;
+    this->accel = - 1000;
     return true;
+}
+
+void Character::onEnter()
+{
+    Node::onEnter();
+    this->scheduleUpdate();
+}
+
+void Character::update(float dt)
+{
+    this->velocity += accel * dt;
+    this->setPosition(this->getPosition() + Vec2(0, this->velocity * dt));
+}
+
+void Character::jump()
+{
+    this->velocity -= 400;
 }
