@@ -15,11 +15,15 @@ public:
     void jump();
     cocos2d::Rect getRect();
     
+    void startFly();
+    void stopFly();
+    
 protected:
     cocostudio::timeline::ActionTimeline* timeline;
     
     float velocity;
     float accel;
+    bool isFlying;
 };
 //
 #endif /* defined(__SushiNeko__Character__) */

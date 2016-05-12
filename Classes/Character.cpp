@@ -10,17 +10,19 @@
 #include "Constants.h"
 using namespace cocos2d;
 
+
 bool Character::init()
 {
     if (! Node::init())
     {
         return false;
     }
-
+    
     this->timeline = cocos2d::CSLoader::createTimeline("Character.csb");
     this->timeline->retain();
     this->velocity = 0;
     this->accel = GRAVITY_ACCEL;
+    this->isFlying = false;
     return true;
 }
 
@@ -32,13 +34,20 @@ void Character::onEnter()
 
 void Character::update(float dt)
 {
-    this->velocity += accel * dt;
-    this->setPosition(this->getPosition() + Vec2(0, this->velocity * dt));
+    if(isFlying)
+    {
+        this->velocity += accel * dt;
+        this->setPosition(this->getPosition() + Vec2(0, this->velocity * dt));
+    }
 }
 
 void Character::jump()
 {
     this->velocity = JUMP_SPEED;
+    
+    this->stopAllActions();
+    this->runAction(this->timeline);
+    this->timeline->play("fly", false);
 }
 
 cocos2d::Rect Character::getRect()
@@ -47,4 +56,14 @@ cocos2d::Rect Character::getRect()
     auto charaPos = this->getPosition();
     return Rect(charaPos.x - contentSize.width / 2, charaPos.y - contentSize.height / 2
                 , contentSize.width * 0.8f, contentSize.height * 0.8f);
+}
+
+void Character::startFly()
+{
+    this->isFlying = true;
+}
+
+void Character::stopFly()
+{
+    this->isFlying = false;
 }
