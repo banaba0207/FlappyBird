@@ -10,7 +10,7 @@
 #define Constants_h
 
 static const float GRAVITY_ACCEL  = -1000.0f;
-static const float JUMP_SPEED     = 400.0f;
+static const float JUMP_SPEED     = 300.0f;
 static const float OBSTACLE_MIN_Y = 200.0f;
 static const float OBSTACLE_MAX_Y = 440.f;
 static const float OBSTACLE_TIME_SPAN = 1.35f;

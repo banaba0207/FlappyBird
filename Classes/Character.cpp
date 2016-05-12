@@ -40,3 +40,11 @@ void Character::jump()
 {
     this->velocity = JUMP_SPEED;
 }
+
+cocos2d::Rect Character::getRect()
+{
+    auto contentSize = this->getChildByName("bird")->getContentSize();
+    auto charaPos = this->getPosition();
+    return Rect(charaPos.x - contentSize.width / 2, charaPos.y - contentSize.height / 2
+                , contentSize.width * 0.8f, contentSize.height * 0.8f);
+}

@@ -64,9 +64,29 @@ void MainScene::onEnter()
 
 void MainScene::update(float dt)
 {
+    //障害物の移動
     for(auto obstacle : this->obstacles)
     {
         obstacle->moveLeft(SCROLL_SPEED * dt);
+    }
+    
+    //障害物とキャラの当たり判定
+    Rect characterRect = this->character->getRect();
+    for(auto obstacle : this->obstacles)
+    {
+        auto obstacleRects = obstacle->getRects();
+        for (Rect obstacleRect : obstacleRects)
+        {
+            if(characterRect.intersectsRect(obstacleRect))
+            {
+                CCLOG("OK");
+                this->unscheduleUpdate();
+                this->unscheduleAllCallbacks();
+            }
+            else{
+               CCLOG("");
+            }
+        }
     }
 }
 
