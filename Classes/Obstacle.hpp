@@ -11,13 +11,15 @@ public:
     bool init() override;
     void moveLeft(float distance);
     std::vector<cocos2d::Rect> getRects();
-    
+    void setIsPlaying(bool flag);
+    void getIsPlaying();
     
 protected:
     cocostudio::timeline::ActionTimeline* timeline;
     
     float velocity;
     float accel;
+    bool isPlaying;
 };
 //
 #endif /* defined(__Obstacle__) */

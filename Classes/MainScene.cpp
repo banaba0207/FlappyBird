@@ -104,12 +104,13 @@ void MainScene::update(float dt)
                 }
             }
         }
-        //床とキャラの当たり判定（厳密には判定していない）
-        if(this->character->getPosition().y <= 110.0f + this->character->getChildByName("bird")->getContentSize().height)
-        {
-            this->triggerGameOver();
-            this->character->stopFly();
-        }
+        
+    }
+    //床とキャラの当たり判定（厳密には判定していない）
+    if(this->character->getPosition().y <= 110.0f + this->character->getChildByName("bird")->getContentSize().height)
+    {
+        this->triggerGameOver();
+        this->character->stopFly();
     }
 }
 
@@ -171,4 +172,5 @@ void MainScene::triggerPlaying()
 void MainScene::triggerGameOver()
 {
     this->gameState = State::GameOver;
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
 }
