@@ -2,6 +2,7 @@
 #define __MAIN_SCENE_H__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 
 class Character;
 #include "Obstacle.hpp"
@@ -15,11 +16,8 @@ enum class State{
 class MainScene : public cocos2d::Layer
 {
 public:
-    // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
-
-    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();
+    virtual bool init() override;
     
     void onEnter() override;
     void update(float dt) override;
@@ -34,6 +32,8 @@ protected:
     State gameState;
     cocos2d::Node* ground1;
     cocos2d::Node* ground2;
+    cocos2d::ui::TextBMFont* scoreLabel;
+    int score;
     
     void setupTouchHandling();
     void createObstacle(float dt);
@@ -41,7 +41,7 @@ protected:
     void triggerPlaying();
     void triggerGameOver();
     void triggerReady();
-
+    void setScore(int score);
 };
 
 #endif // __MainScene_SCENE_H__

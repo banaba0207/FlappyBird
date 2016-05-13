@@ -46,11 +46,15 @@ bool MainScene::init()
     this->background= rootNode->getChildByName("back");
     this->character = this->background->getChildByName<Character*>("character");
     
-    
     this->ground1 = this->background->getChildByName("ground1");
     this->ground2 = this->background->getChildByName("ground2");
     this->ground1->setLocalZOrder(1);
     this->ground2->setLocalZOrder(2);
+    
+    this->scoreLabel = this->background->getChildByName<ui::TextBMFont*>("scoreLabel");
+    this->scoreLabel->setLocalZOrder(1);
+    this->scoreLabel->setString("0");
+    this->score = 0;
     
     this->character->setLocalZOrder(3);
     addChild(rootNode);
@@ -68,6 +72,7 @@ void MainScene::onEnter()
 
 void MainScene::update(float dt)
 {
+    float moveDistance = SCROLL_SPEED * dt;
     if (this->gameState == State::Playing)
     {
         //障害物の移動
@@ -102,6 +107,18 @@ void MainScene::update(float dt)
                 {
                     this->triggerGameOver();
                 }
+            }
+        }
+        
+        //スコアの判定
+        for(auto obstacle : this->obstacles)
+        {
+            float currentX = obstacle->getPositionX();
+            float lastX = currentX - moveDistance;
+            if (lastX < this->character->getPositionX()
+                && this->character->getPositionX() <= currentX)
+            {
+                this->setScore(this->score + 1);
             }
         }
     }
@@ -181,4 +198,10 @@ void MainScene::triggerGameOver()
 {
     this->gameState = State::GameOver;
     this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::createObstacle));
+}
+
+void MainScene::setScore(int score)
+{
+    this->score = score;
+    this->scoreLabel->setString(std::to_string(score));
 }

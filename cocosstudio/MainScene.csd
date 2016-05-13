@@ -41,6 +41,16 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="Character.csd" Plist="" />
               </AbstractNodeData>
+              <AbstractNodeData Name="scoreLabel" ActionTag="-1330394964" Tag="42" IconVisible="False" LeftMargin="132.5571" RightMargin="131.4429" TopMargin="66.1668" BottomMargin="391.8332" LabelText="0" ctype="TextBMFontObjectData">
+                <Size X="24.0000" Y="54.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="144.5571" Y="418.8332" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5019" Y="0.8180" />
+                <PreSize X="0.0833" Y="0.1055" />
+                <LabelBMFontFile_CNB Type="Normal" Path="Assets/font/font1.fnt" Plist="" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="144.0000" Y="256.0000" />
@@ -51,13 +61,13 @@
             <FileData Type="Normal" Path="Assets/background/back1.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="as_1" ActionTag="-110946049" VisibleForFrame="False" Alpha="127" Tag="6" IconVisible="False" LeftMargin="0.9988" RightMargin="-338.9988" TopMargin="-464.9999" BottomMargin="14.9999" ctype="SpriteObjectData">
+          <AbstractNodeData Name="as_1" ActionTag="-110946049" VisibleForFrame="False" Alpha="127" Tag="6" IconVisible="False" LeftMargin="0.9989" RightMargin="-338.9989" TopMargin="-486.1960" BottomMargin="36.1960" ctype="SpriteObjectData">
             <Size X="626.0000" Y="962.0000" />
             <AnchorPoint />
-            <Position X="0.9988" Y="14.9999" />
-            <Scale ScaleX="0.4601" ScaleY="0.5218" />
+            <Position X="0.9989" Y="36.1960" />
+            <Scale ScaleX="0.4601" ScaleY="0.4548" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0035" Y="0.0293" />
+            <PrePosition X="0.0035" Y="0.0707" />
             <PreSize X="2.1736" Y="1.8789" />
             <FileData Type="Normal" Path="as.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
