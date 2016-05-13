@@ -78,14 +78,17 @@ void MainScene::update(float dt)
         
         //床の移動
         this->ground1->setPosition(this->ground1->getPosition() + Vec2(- SCROLL_SPEED * dt, 0));
-        if (this->ground1->getPosition().x < -288)
-        {
-            this->ground1->setPosition(Vec2(288, 110));
-        }
         this->ground2->setPosition(this->ground2->getPosition() + Vec2(- SCROLL_SPEED * dt, 0));
-        if (this->ground2->getPosition().x < -288)
+        
+        float backWidth = this->background->getContentSize().width;
+        float groundHeight = this->ground1->getContentSize().height;
+        if (this->ground1->getPosition().x < -backWidth)
         {
-            this->ground2->setPosition(Vec2(288, 110));
+            this->ground1->setPosition(Vec2(backWidth, groundHeight));
+        }
+        if (this->ground2->getPosition().x < -backWidth)
+        {
+            this->ground2->setPosition(Vec2(backWidth, groundHeight));
         }
         
         //障害物とキャラの当たり判定
@@ -99,15 +102,14 @@ void MainScene::update(float dt)
                 {
                     this->triggerGameOver();
                 }
-                else{
-                    CCLOG("");
-                }
             }
         }
-        
     }
-    //床とキャラの当たり判定（厳密には判定していない）
-    if(this->character->getPosition().y <= 110.0f + this->character->getChildByName("bird")->getContentSize().height)
+    //床とキャラの当たり判定（キャラが床以下の高さになったとき）
+    float groundHeight = this->ground1->getContentSize().height;
+    
+    if(this->character->getPosition().y - this->character->getChildByName("bird")->getContentSize().height
+       <= groundHeight)
     {
         this->triggerGameOver();
         this->character->stopFly();
@@ -124,16 +126,22 @@ void MainScene::setupTouchHandling()
         switch (this->gameState)
         {
             case State::Ready:
+            {
                 this->triggerPlaying();
                 break;
+            }
             case State::Playing:
+            {
                 this->character->jump();
                 break;
+            }
             case State::GameOver:
+            {
                 auto nextGameScene = MainScene::createScene();
                 auto transition = TransitionFade::create(1.0f, nextGameScene);
                 Director::getInstance()->replaceScene(transition);
                 break;
+            }
         }
         return true;
     };
